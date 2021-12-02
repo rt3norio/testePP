@@ -27,9 +27,11 @@ class NotificationJob extends Job
      */
     public function handle()
     {
-        //
         Log::info("starting notification job");
-        Http::get("http://o4d9z.mocklab.io/notify/$this->payee/$$this->amount");
+        $this->payee; //para evitar erro de variavel não utilizada
+        $this->amount; //para evitar erro de variavel não utilizadas
+        Http::get("http://o4d9z.mocklab.io/notify");
+        // Http::get("http://o4d9z.mocklab.io/notify/$this->payee/$$this->amount"); a API não aceita passar dados extras, mas eu tentei
         Log::info("finishing notification job");
     }
 }

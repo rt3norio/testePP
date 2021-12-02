@@ -16,7 +16,7 @@ class UserController extends BaseController
             'email' => $request->email,
             'password' => $request->password,
             'taxCode' => $request->taxCode,
-            'store' => $request->moneySink
+            'store' => $request->store
         ]);
     }
 

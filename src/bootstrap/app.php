@@ -1,8 +1,10 @@
 <?php
 
+use App\Interfaces\TransactionAuthorizatorInterface;
 use App\Interfaces\TransactionRepositoryInterface;
 use App\Interfaces\TransactionServiceInterface;
 use App\Repositories\TransactionRepository;
+use App\Services\AuthorizatorService;
 use App\Services\TransactionService;
 
 require_once __DIR__ . '/../vendor/autoload.php';
@@ -45,6 +47,7 @@ $app->withEloquent();
 
 $app->bind(TransactionServiceInterface::class, TransactionService::class);
 $app->bind(TransactionRepositoryInterface::class, TransactionRepository::class);
+$app->bind(TransactionAuthorizatorInterface::class, AuthorizatorService::class);
 
 $app->singleton(
     Illuminate\Contracts\Debug\ExceptionHandler::class,

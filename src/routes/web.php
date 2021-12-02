@@ -20,7 +20,7 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-$router->put('/user', 'UserController@create');
+$router->post('/user', 'UserController@create');
 $router->get('/user/{id}', 'UserController@show');
 
 $router->post('/transaction', 'TransactionController@transact');
