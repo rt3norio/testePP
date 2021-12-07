@@ -6,7 +6,9 @@ use App\Interfaces\TransactionAuthorizatorInterface;
 use App\Interfaces\TransactionServiceInterface;
 use App\Interfaces\TransactionRepositoryInterface;
 use App\Jobs\NotificationJob;
+use Exception;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Throwable;
 
 class SecureTransactionService implements TransactionServiceInterface
 {
@@ -26,7 +28,11 @@ class SecureTransactionService implements TransactionServiceInterface
         if ($payer->balance < $amount) throw new HttpException(403, "not enought funds");
         if ($payer->store) throw new HttpException(403, "store not authorized to transfer funds");
 
-        $authorized = $this->transactionAuthorizator->authorizeTransaction($payer, $payee, $amount);
+        try {
+            $authorized = $this->transactionAuthorizator->authorizeTransaction($payer, $payee, $amount);
+        } catch (Throwable $t) {
+            throw new HttpException(403, 'failed to authorize transaction');
+        }
 
         if (!$authorized) throw new HttpException(403, "unauthorized");
 
