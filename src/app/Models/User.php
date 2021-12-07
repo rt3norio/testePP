@@ -30,4 +30,15 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     protected $hidden = [
         'password',
     ];
+
+
+    public function sentTransactions()
+    {
+        return $this->hasMany(Transaction::class, 'payer_user_id', 'id');
+    }
+
+    public function receivedTransactions()
+    {
+        return $this->hasMany(Transaction::class, 'payee_user_id', 'id');
+    }
 }

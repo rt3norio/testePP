@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Interfaces\TransactionServiceInterface;
+use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Laravel\Lumen\Routing\Controller as BaseController;
@@ -27,17 +28,15 @@ class TransactionController extends BaseController
         if ($this->transactionService->pay($payer, $payee, $request->value)) {
             return ['success' => true];
         }
+
+        //a implementação atual do metodo pay() apenas retorna true, ou exception. outra implementação pode retornar false.
         return ['success' => false];
     }
 
-    public function create(Request $request)
+    public function listFromUser(Request $request, $id)
     {
-        return User::firstOrCreate([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => $request->password,
-            'taxCode' => $request->taxCode,
-            'store' => $request->moneySink
-        ]);
+        $user = User::findOrFail($id);
+        $transactions = Transaction::fromUser($user)->orderBy('created_at')->get();
+        return $transactions;
     }
 }

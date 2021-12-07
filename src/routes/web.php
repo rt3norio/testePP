@@ -22,5 +22,6 @@ $router->get('/', function () use ($router) {
 
 $router->post('/user', 'UserController@create');
 $router->get('/user/{id}', 'UserController@show');
+$router->get('/user/{id}/transactions/', 'TransactionController@listFromUser');
 
 $router->post('/transaction', 'TransactionController@transact');

@@ -8,7 +8,7 @@ use App\Interfaces\TransactionRepositoryInterface;
 use App\Jobs\NotificationJob;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
-class TransactionService implements TransactionServiceInterface
+class SecureTransactionService implements TransactionServiceInterface
 {
     private $transactionRepository;
     private $transactionAuthorizator;
@@ -28,11 +28,11 @@ class TransactionService implements TransactionServiceInterface
 
         $authorized = $this->transactionAuthorizator->authorizeTransaction($payer, $payee, $amount);
 
-        if (!$authorized) throw new HttpException(403, "unauthorized");;
+        if (!$authorized) throw new HttpException(403, "unauthorized");
 
-        $databaseOperation = $this->transactionRepository->transferFunds($payer, $payee, $amount);
+        $databaseOperationSuccessfull = $this->transactionRepository->transferFunds($payer, $payee, $amount);
 
-        // if ($databaseOperation) throw new HttpException(403, "database error");
+        if (!$databaseOperationSuccessfull) throw new HttpException(403, "database error");
 
         dispatch(new NotificationJob($payee, $amount));
         return true;

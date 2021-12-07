@@ -24,10 +24,9 @@ class TransactionRepository implements TransactionRepositoryInterface
             return false;
         }
 
-
         DB::insert("
-            insert into transactions (amount, payer_user_id, payee_user_id) values (?,?,?)
-        ", [$amount, $payer->id, $payee->id]);
+        insert into transactions (payer_user_id, payee_user_id, amount, created_at, updated_at) values (?,?,?, now(), now())
+        ", [$payer->id, $payee->id, $amount]);
 
         DB::update('update users set balance = ? where id = ?', [$payer->balance - $amount, $payer->id]);
         DB::update('update users set balance = ? where id = ?', [$payee->balance + $amount, $payee->id]);
