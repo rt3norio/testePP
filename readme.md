@@ -1,5 +1,16 @@
 # php challenge
 
+
+Instalação:
+- Clone do repositorio.
+- docker-compose up 
+- docker-compose exec app bash
+- composer install
+- php artisan migrate:fresh --seed
+- hit /
+
+---
+
 O intuito desse projeto é poder criar contas, e transferir dinheiro entre elas.
 
 ---
