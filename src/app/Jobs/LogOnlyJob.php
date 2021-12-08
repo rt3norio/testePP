@@ -4,7 +4,7 @@ namespace App\Jobs;
 
 use Illuminate\Support\Facades\Log;
 
-class NotificationJob extends Job
+class LogOnlyJob extends Job
 {
     private $payee;
     private $amount;
