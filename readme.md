@@ -51,9 +51,9 @@ Os métodos disponíveis para consulta via rest são:
     - make payment ok
     - check history ok
 - unit testing
-    - services doing
-    - repositories doing
-    - controller todo
+    - services ok
+    - repositories ok
+    - controller ok
 - dockerfile todo
     - from scratch
     - with mysql
