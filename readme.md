@@ -13,6 +13,7 @@ O intuito desse projeto é poder criar contas, e transferir dinheiro entre elas.
 
 - As dependências do serviço responsavel por realizar a transação são injetadas pelo framework, e a definição de qual classe será utilizada está localizado em bootstrap/app.php na seção de Container Bindings.
 
+- foi escolhido não usar PHPdoc nas classes e métodos não apenas para evitar poluir demais o codigo com comentários, mas também para seguir a premissa de que caso você precise explicar um código, ele deve estar mal escrito.
 
 ---
 Os métodos disponíveis para consulta via rest são:
@@ -44,17 +45,17 @@ Os métodos disponíveis para consulta via rest são:
 
 ### **Lista de Tarefas**
 - Usuário
-    - create user
-    - view user
+    - create user ok
+    - view user ok
 - payment
-    - make payment
-    - check history #todo
+    - make payment ok
+    - check history ok
 - unit testing
-    - services
-    - repositories
-    - controller
-- dockerfile
+    - services doing
+    - repositories doing
+    - controller todo
+- dockerfile todo
     - from scratch
     - with mysql
     - 
-- async jobs
+- async jobs todo
