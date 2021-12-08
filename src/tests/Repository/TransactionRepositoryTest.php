@@ -1,44 +1,12 @@
 <?php
 
-use App\Models\Transaction;
-use App\Models\User;
 use App\Repositories\TransactionRepository;
-use App\Services\LogOnlyAuthorizatorService;
-use App\Services\WebMockyAuthorizatorService;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Log;
+
 
 use function PHPUnit\Framework\assertTrue;
 
 class TransactionRepositoryTest extends TestCase
 {
-    private $user1;
-    private $user2;
-
-    private function refreshTestData()
-    {
-        Transaction::getQuery()->delete();
-        User::getQuery()->delete();
-
-        $this->user1 = User::create([
-            'name' => 'user1',
-            'email' => 'user1@user1.com',
-            'password' => '123', // password
-            'taxCode' => '0000',
-            'store' => false,
-            'balance' => 0
-        ]);
-
-        $this->user2 =  User::create([
-            'name' => 'user2',
-            'email' => 'user2@user2.com',
-            'password' => '123', // password
-            'taxCode' => '0001',
-            'store' => false,
-            'balance' => 0
-        ]);
-    }
 
     public function testIfRepositoryPayMethodTransfersMoneyToStore()
     {
