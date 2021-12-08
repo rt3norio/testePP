@@ -37,7 +37,8 @@ RUN apt-get install -y \
     php7.4-mbstring \ 
     php7.4-json \
     php7.4-xml \
-    php7.4-bcmath
+    php7.4-bcmath \
+    php7.4-xdebug
 
 # Install NPM and Node.js
 RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
@@ -73,6 +74,8 @@ RUN apt-get install -y supervisor
 RUN mkdir -p /var/log/supervisor
 ADD resources/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
+#------------- xdebug config ---------------------------------------------------------------
+ADD resources/99-xdebug.ini /etc/php/7.4/fpm/conf.d/99-xdebug.ini
 #------------- Container Config ---------------------------------------------------------------
 
 # Expose port 80
