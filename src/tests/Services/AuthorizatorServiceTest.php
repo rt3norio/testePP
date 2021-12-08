@@ -12,7 +12,7 @@ class AuthorizatorServiceTest extends TestCase
     private $payer;
     private $payee;
 
-    private function refreshTestData()
+    private function createTestData()
     {
         $this->payer = new stdClass();
         $this->payer->id = 1;
@@ -22,7 +22,7 @@ class AuthorizatorServiceTest extends TestCase
 
     public function testIfWebMockyImplementationTriesToCallHttpServer()
     {
-        $this->refreshTestData();
+        $this->createTestData();
         Http::shouldReceive('get')
             ->once()
             ->andReturn(['message' => 'Autorizado']);
@@ -35,7 +35,7 @@ class AuthorizatorServiceTest extends TestCase
 
     public function testIfLogOnlyTriesToLog()
     {
-        $this->refreshTestData();
+        $this->createTestData();
         Log::shouldReceive('info')
             ->once()
             ->andReturn([]);
