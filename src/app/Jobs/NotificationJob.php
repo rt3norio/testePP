@@ -14,7 +14,7 @@ class NotificationJob extends Job
      *
      * @return void
      */
-    public function __construct($payee, $amount)
+    public function __construct(string $payee, string $amount)
     {
         $this->payee = $payee;
         $this->amount = $amount;
